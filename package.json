@@ -1,6 +1,6 @@
 {
   "name": "language-robox",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "R3 (Robox motion controller language) support in Atom",
   "keywords": [
     "Robox",
@@ -15,6 +15,5 @@
   "engines": {
     "atom": "*"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
