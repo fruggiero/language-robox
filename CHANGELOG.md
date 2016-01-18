@@ -1,3 +1,6 @@
+## 1.0.2 - Fix wrong commit
+* Fix some missing file in last commit
+
 ## 1.0.1 - Bugfix
 * Fixed file names
 
