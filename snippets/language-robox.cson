@@ -1,0 +1,22 @@
+'.source.r3':
+  'if, else, endif':
+    'prefix': 'ife'
+    'body': 'if (${1:true})\n\t$2\nelse\n\t$3\nend_if$0'
+  'if endif':
+    'prefix': 'if'
+    'body': 'if (${1:true})\n\t$2\nend_if$0'
+  'void function':
+    'prefix': 'funcv'
+    'body': 'function ${1:functionName}($2)\n\t$3\nendfun$0'
+  'function':
+    'prefix': 'fun'
+    'body': 'function ${1:int} ${2:functionName}($3)\n\t$4\nendfun$0'
+  'select case':
+    'prefix': 'select'
+    'body': 'select (${1:var})\n\tcase ${2:1}\n\t\t$3\n\t\tbreak\n\tdefault\n\t\t$4\n\t\tbreak\nendselect$0'
+  'while loop':
+    'prefix': 'while'
+    'body': 'while (${1:true})\n\t$2\nendwhile$0'
+  'for loop':
+    'prefix': 'for'
+    'body': 'for (${1:i} = 0 , ${1:i} < ${2:10}, ${1:i} = ${1:i} + 1)\n\t$3\nendfor$0'
