@@ -1,0 +1,20 @@
+{
+  "name": "language-robox",
+  "version": "1.0.0",
+  "description": "R3 (Robox motion controller language) support in Atom",
+  "keywords": [
+    "Robox",
+    "R3"
+  ],
+  "homepage": "http://fruggiero.github.io/language-robox",
+  "repository": "https://github.com/fruggiero/language-robox.git",
+  "bugs": {
+    "url": "https://github.com/fruggiero/language-robox/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": "*"
+  },
+  "dependencies": {
+  }
+}

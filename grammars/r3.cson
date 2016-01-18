@@ -1,0 +1,859 @@
+'scopeName':'source.r3'
+'name':'Robox R3'
+'fileTypes':[
+  'r3'
+  'i3'
+]
+'foldingStartMarker': '(?i:^\\s*(struct|tabstr|function)\\s*$)' #IGNORATE DA ATOM ,textmate invece le usa
+'foldingStopMarker': '(?i:^\\s*(end_struct|endstruct|endfun|end_fun|endtab)\\s*$)'#IGNORATE DA ATOM,textmate invece le usa
+'patterns':[
+  {
+    'include':"#line_comments"
+  }
+  {
+    'include':"#single_quoted_string"
+  }
+  {
+    'include':"#double_quoted_string"
+  }
+  {
+    'comment':'include di file'
+    'begin':'(?i:^\\s*(\\$\\s*include)\\s*)'
+    'beginCaptures':
+      '1':
+        'name':'keyword.other.metacommand.r3'
+    'end':'(?=\\n)'
+    'patterns':[
+      {
+        'include':'$self'
+      }
+    ]
+    'name':'meta.include.r3'
+  }
+  {
+    'comment':'definizione variabili , es: lit Asse_W4_State r(1409) '
+    'begin':'(?i:^\\s*(lit)\\s+[a-z_][a-z_0-9]*\\s+)'
+    'beginCaptures':
+      '1':
+        'name':'storage.modifier.r3'
+    'end':'(?=\\n)'
+    'name':'meta.variable-definition.r3'
+    'patterns':[
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'comment':'definizione simbolo preprocessore con valore, es:  $define carmelo = 2'
+    'begin':'(?i:^\\s*(\\$\\s*define)\\s*([a-z_][a-z_0-9]*)\\s*(=)\\s*(?=[a-z_0-9]*))'
+    'beginCaptures':
+      '1':
+        'name':'keyword.other.metacommand.r3'
+      '2':
+        'name':'variable.other.r3'
+      '3':
+        'name':'keyword.operator.assignment.r3'
+    'end':'(\\s*$)'
+    'patterns':[
+      {
+        'include':'$self'
+      }
+    ]
+    'name':'meta.symbol-definition.r3'
+  }
+  {
+    'comment':'definizione simbolo preprocessore , es:  $define carmelo'
+    'match':'(?i:^\\s*(\\$\\s*define)\\s*([a-z_][a-z_0-9]*)\\s*)'
+    'captures':
+      '1':
+        'name':'keyword.other.metacommand.r3'
+      '2':
+        'name':'variable.other.r3'
+    'name':'meta.symbol-definition.r3'
+  }
+  {
+    'comment' : 'inizio definizione funzione, senza valore di ritorno'
+    'begin': '(?i:^\\s*(function)\\s+([a-z_][a-z_0-9]*)\\s*(\\())'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.function.r3'
+      '2':
+        'name': 'entity.name.function.r3'
+      '3':
+        'name': 'punctuation.definition.arguments.begin.r3'
+    'patterns':[
+      {
+        'match':','
+        'name':'punctuation.separator.parameters.r3'
+      }
+      {
+        'include':'$self'
+      }
+    ]
+    'contentName':'meta.function-definition.arguments.r3'
+    'end': '(\\))\\s*$'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.end.r3'
+    'name': 'meta.function-definition.begin.r3'
+  }
+  {
+    'comment' : 'inizio definizione funzione, con valore di ritorno'
+    'begin': '(?i:^\\s*(function)\\s+([a-z_]*)\\s+([a-z_][a-z_0-9]*)\\s*(\\())'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.function.r3'
+      '2':
+        'name': 'storage.type.return-value.r3'
+      '3':
+        'name': 'entity.name.function.r3'
+      '4':
+        'name': 'punctuation.definition.arguments.begin.r3'
+    'patterns':[
+      {
+        'match':','
+        'name':'punctuation.separator.parameters.r3'
+      }
+      {
+        'include':'$self'
+      }
+    ]
+    'contentName':'meta.function-definition.arguments.r3'
+    'end': '(\\))\\s*$'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.end.r3'
+    'name': 'meta.function-definition.begin.r3'
+  }
+  {
+    'comment' : 'fine definizione funzione'
+    'begin': '(?i:^\\s*(end_fun|endfun)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.function.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.function-definition.end.r3'
+  }
+  {
+    'comment' : 'inizio definizione motion'
+    'begin': '(?i:^\\s*(motion)(?=\\s*$))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.motion.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.motion.begin.r3'
+  }
+  {
+    'comment' : 'fine definizione motion'
+    'begin': '(?i:^\\s*(end_motion|endmotion)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.motion.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.motion.end.r3'
+  }
+  {
+    'comment' : 'inizio definizione aux'
+    'begin': '(?i:^\\s*(aux)(?=\\s*$))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.aux.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.aux.begin.r3'
+  }
+  {
+    'comment' : 'fine definizione aux'
+    'begin': '(?i:^\\s*(end_aux|endaux)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.aux.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.aux.end.r3'
+  }
+  {
+    'comment' : 'inizio definizione mainloop'
+    'begin': '(?i:^\\s*(__main_loop__)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.mainloop.r3'
+    'end': '(?=\\n)'
+    'name': 'meta.mainloop.begin.r3'
+  }
+  {
+    'comment' : 'fine definizione mainloop'
+    'begin': '(?i:^\\s*(end_main_loop)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.mainloop.r3'
+    'end': '(?=\\n)'
+    'name': 'meta.mainloop.end.r3'
+  }
+  {
+    'comment' : 'inizio definizione ref'
+    'begin': '(?i:^\\s*(ref)(?=\\s*$))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.ref.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.ref.begin.r3'
+  }
+  {
+    'comment' : 'fine definizione ref'
+    'begin': '(?i:^\\s*(end_ref|endref)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.ref.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.ref.end.r3'
+  }
+  {
+    'comment' : 'inizio definizione rule'
+    'begin': '(?i:^\\s*(rule)\\s+([0-9]*\\s*$))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.rule.r3'
+      '2':
+        'name': 'constant.numeric.integer.decimal.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.rule.begin.r3'
+  }
+  {
+    'comment' : 'fine definizione rule'
+    'begin': '(?i:^\\s*(end_rule|endrule)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.rule.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.rule.end.r3'
+  }
+  {
+    'comment' : 'inizio definizione struttura'
+    'begin': '(?i:^\\s*(struct|tabstr|struct_p)\\s+(?=[a-z_][a-z_0-9]*\\s*$))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.struct.r3'
+    'contentName': 'entity.name.type.struct.r3'
+    'end': '(\\s*$)'
+    'name': 'meta.struct.begin.r3'
+  }
+  {
+    'comment' : 'fine definizione struttura'
+    'begin': '(?i:^\\s*(end_struct|endstruct|endtab|end_tab)(?=\\s*))'
+    'beginCaptures':
+      '1':
+        'name': 'storage.type.struct.r3'
+    'end': '(\\s*$)'
+    # 'endCaptures':
+    #   '1':
+    #     'name': 'punctuation.section.struct.end.r3'
+    'name': 'meta.struct.end.r3'
+  }
+  {
+    'comment':'inizio definizione blocco condizionale preprocessore'
+    'begin': '(?i:(?=\\$\\s*ifdef|\\$\\s*ifndef\\s+))'
+    'end': '(?=\\n)'
+    'name': 'meta.meta-conditional.begin.r3'
+    'patterns': [
+      {
+        'comment': 'argomenti'
+        'begin': '^\\s*(\\$\\s*ifdef|\\$\\s*ifndef)\\s+'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.other.metacommand.r3'
+        'contentName': 'meta.meta-conditional.arguments.r3'
+        'end': '(?=\\n)'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]
+  }
+  {
+    'comment' : 'fine definizione blocco condizionale preprocessore'
+    'match':'(?i:\\s*(\\$\\s*endif)\\s*)'
+    'captures':
+      '1':
+        'name': 'keyword.other.metacommand.r3'
+    'name': 'meta.meta-conditional.end.r3'
+  }
+  {
+    'name': 'keyword.control.r3'
+    'match': '\\b(?i:(_if|if|_else|else|end_if|endif|continue|break|select|case|default|endselect|end_select|return|goto|for|endfor|end_for|while|end_while|endwhile|do|end_do_while))\\b'
+  }
+  {
+    'match': '\\b(?i:(true|false|K_E|K_PI|K_PIMEZZI|K_1_PI|K_DUEPI|K_EPSILON|K_MAXFLOAT|K_MINFLOAT|K_MAXREAL|K_MINREAL))\\b'
+    'name': 'constant.language.r3'
+    'comment': 'Costanti del linguaggio'
+  }
+  {
+    'comment': 'operatori logici'
+    'match': '\\b(?i:(and|or|not|xor))\\b'
+    'name': 'keyword.operator.logical.r3'
+  }
+  {
+    'comment': 'operatori binari su variabili intere'
+    'match': '\\b(?i:(r_and|r_or|r_not|r_xor))\\b'
+    'name': 'keyword.operator.binary.r3'
+  }
+  {
+    'comment': 'operatori di confronto'
+    'match': '>\\=|<\\=|><|<|>|\\='
+    'name': 'keyword.operator.comparison.r3'
+  }
+  {
+    'comment': 'operatori aritmetici'
+    'match': '\\+|\\-|\\*|/'
+    'name': 'keyword.operator.arithmetic.r3'
+  }
+  {
+    'comment': 'operatori di concatenazione stringhe'
+    'match': '#'
+    'name': 'keyword.operator.chaining.r3'
+  }
+  {
+    'comment':'chiamata a funzione con il call'
+    'begin': '(?i:(?=\\s*call\\s*[A-Za-z_][A-Za-z0-9_]*\\s*\\(?))'
+    'end': '(\\)?)(\\s*$)'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.begin.r3'
+    'name': 'meta.function-call.r3'
+    'patterns': [
+      {
+        'begin': '(?i:\\s*(call)\\s*)'
+        'beginCaptures':
+          '1':
+            'name':'keyword.other.r3'
+        'end': '(\\s*)'
+      }
+      {
+        'comment' : 'nomi di funzione'
+        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()'
+        'end': '(?=\\s*\\()'
+        'patterns': [
+          {
+            'include': '#function_names'
+          }
+        ]
+        'contentName':'meta.function-call.function-name.r3'
+      }
+      {
+        'comment' : 'nomi di funzione'
+        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*\\s*)'
+        'end': '(?=\\s*$)'
+        'patterns': [
+          {
+            'include': '#function_names'
+          }
+        ]
+        'contentName':'meta.function.r3'
+      }
+      {
+        'comment': 'argomenti'
+        'begin': '(\\()'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.arguments.begin.r3'
+        'contentName': 'meta.function-call.arguments.r3'
+        'end': '(?=\\))'
+        'patterns': [
+          {
+            'match': ','
+            'name': 'punctuation.separator.parameters.r3'
+          }
+          {
+            'include': '$self'
+          }
+          {
+            'match': '\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*'
+            'captures':
+              '1':
+                'name': 'variable.parameter.function.r3'
+          }
+        ]
+      }
+    ]
+  }
+  {
+    'comment':'chiamata a funzione'
+    'begin': '(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()'
+    'end': '(\\))'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.definition.arguments.end.r3'
+    'name': 'meta.function-call.r3'
+    'patterns': [
+      {
+        'comment' : 'nomi di funzione'
+        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()'
+        'end': '(?=\\s*\\()'
+        'patterns': [
+          {
+            'include': '#function_names'
+          }
+        ]
+        'contentName':'meta.function-call.function-name.r3'
+      }
+      {
+        'comment': 'argomenti'
+        'begin': '(\\()'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.definition.arguments.begin.r3'
+        'contentName': 'meta.function-call.arguments.r3'
+        'end': '(?=\\))'
+        'patterns': [
+          {
+            'match': ','
+            'name': 'punctuation.separator.parameters.r3'
+          }
+          {
+            'include': '$self'
+          }
+          {
+            'match': '\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*'
+            'captures':
+              '1':
+                'name': 'variable.parameter.function.r3'
+          }
+        ]
+      }
+    ]
+  }
+  {
+    'captures':
+      '1':
+        'name': 'keyword.other.metacommand.r3'
+    'match': '(?x)(?i:\\s*(\\$\\s*ifdef|\\$\\s*ifndef|\\$\\s*else|\\$\\s*endif|\\$\\s*rule|\\$\\s*task|\\$\\s*RULE_PERIODIC|\\$\\s*RULE_TIME|\\$\\s*RULE_INP|\\$\\s*DEFINE|
+    \\$\\s*expand|\\$\\s*include|\\$\\s*CLOSE_LOOP|\\$\\s*CHECK_ARRAY|\\$\\s*WRITE_ON_EXTERN|\\$\\s*USE_RPE|\\$\\s*ERROR|\\$\\s*STEP|
+    \\$\\s*WARNING)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.modifier.r3'
+    'match': '(?i:\\b(lit)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.type.function.r3'
+    'match': '(?i:\\b(function)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.type.struct.r3'
+    'match': '(?i:\\b(struct|tabstr|struct_p)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.type.mainloop.r3'
+    'match': '(?i:\\b(__main_loop__|end_main_loop)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.type.aux.r3'
+    'match': '(?i:\\b(aux|end_aux|endaux)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.type.ref.r3'
+    'match': '(?i:\\b(ref|end_ref|endref)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.type.motion.r3'
+    'match': '(?i:\\b(motion|end_motion|endmotion)\\b)'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'storage.type.rule.r3'
+    'match': '(?i:\\b(rule|end_rule|endrule)\\b)'
+  }
+  {
+    'match': '\\b(?i:(0x\\h*))'
+    'name': 'constant.numeric.integer.hexadecimal.with-prefix.r3'
+    'comment': 'numeri esadecimali con prefisso 0x'
+  }
+  {
+    'match': '\\b(?i:(\\h+h))'
+    'name': 'constant.numeric.integer.hexadecimal.with-suffix.r3'
+    'comment': 'numeri esadecimali con suffisso H'
+  }
+  {
+    'match':'\\b[+-]?(?<Mantissa>\\d+\\.?\\d*|\\d*\\.?\\d+)(?<Exponent>[Ee][+\\-\\x20]?\\d+)'
+    'captures':
+      '1':
+        'name':'constant.numeric.real.mantissa.r3'
+      '2':
+        'name':'constant.numeric.real.exponent.r3'
+    'name':'constant.numeric.real.r3'
+    'comment': 'numero reale suddiviso in mantissa ed esponente (eventualmente con segno)'
+  }
+  {
+    'match':'\\b[+-]?(?<Mantissa>(?<!\\.)\\d+\\.\\d+(?!\\.))'
+    'name':'constant.numeric.real.r3'
+    'comment':'numero reale con solo mantissa (eventualmente con segno)'
+  }
+  {
+    'match': '\\b([1-9]+[0-9]*|0)'
+    'name': 'constant.numeric.integer.decimal.r3'
+    'comment': 'numero intero con base decimale'
+  }
+  {
+    #preso da python.cson
+    'comment':'fix per operatori logici usati dentro a funzioni'
+    'begin': '(\\()'
+    'end': '(\\))'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
+    'include':'#dotted_name'
+  }
+  {
+    'match': '\\['
+    'name': 'punctuation.section.array.begin.r3'
+  }
+  {
+    'match': '\\]'
+    'name': 'punctuation.section.array.end.r3'
+  }
+]
+
+'repository':
+  'function_names':
+    'patterns': [
+      {
+        'begin': '(?=[A-Za-z_][A-Za-z0-9_]*)'
+        'end': '(?![A-Za-z0-9_])'
+        'patterns': [
+          {
+            'include': '#builtin_functions'
+          }
+          {
+            'include': '#rpe_functions'
+          }
+          {
+            'include': '#illegal_names'
+          }
+          {
+            'include': '#generic_names'
+          }
+        ]
+      }
+    ]
+  'all_types':
+    'patterns':[
+      {
+        'include':'#primitive_types'
+      }
+      {
+        'include':'#rpe_structures'
+      }
+      {
+        'include':'#builtin_structs'
+      }
+    ]
+
+  'line_comments':
+    'comment':"commenti su riga singola"
+    'begin': '(^[ \\t]+)?(?=\\;)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.whitespace.comment.leading.r3'
+    'end': '(?!\\G)'
+    'patterns': [
+      {
+        'begin': ';'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.r3'
+        'end': '(?=\\n)'
+        'name': 'comment.line.character.r3'
+      }
+    ]
+  'double_quoted_string':
+    'patterns': [
+      {
+
+        'begin': '\"'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.r3'
+        'end': '(\")|(\\n)'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.r3'
+        'name': 'string.quoted.double.r3'
+        'patterns': [
+          {
+            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.r3'
+          }
+        ]
+      }
+    ]
+  'single_quoted_string':
+    'patterns': [
+      {
+        'begin': '\''
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.string.begin.r3'
+        'end': '(\')|(\\n)'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.string.end.r3'
+        'name': 'string.quoted.single.r3'
+        'patterns': [
+          {
+            'match': '\\\\([\'\"])'
+            # 'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)'
+            'name': 'constant.character.escape.r3'
+          }
+        ]
+      }
+    ]
+  'primitive_types':
+    'patterns': [
+      {
+        'match': '\\b(?i:char|counter|float|int|i16|i32|i8|power_set|real|string|timer|u16|u32|u8)\\b'
+        'name': 'storage.type.r3'
+      }
+    ]
+  'rpe_structures':
+    'patterns': [
+      {
+        'match': '\\b(?i:AXES_GROUP|PATH|POINT_L|POINT_C|POINT_J|TRANSFORM|STRU_ISO_DATA)\\b'
+        'name': 'support.type.rpe.r3'
+        'comment': 'strutture introdotte da estensione rpe'
+      }
+    ]
+  'builtin_structs':
+    'patterns':[
+      {
+        'match':'(?x)\\b(?i:BCC_MSGUSER|STRU_AH_D|STRU_AH_INFO|STRU_AS_D|STRU_CAM|STRU_COERRMSG|STRU_CO_OBJ|stru_crimper|STRU_FILEHND|
+        STRU_FILEINFO|STRU_FOLLOW|STRU_FOLLOW2|STRU_FOLLOW2_info|STRU_FOLLOW2_S|STRU_FOLLOW2_SM|stru_gror|stru_int|STRU_MASTERF|
+        STRU_MATCAM|STRU_MODBUS|STRU_MVGENITP|STRU_MVITP|STRU_MVITPCJ|STRU_MVTO|STRU_MVTOCJ|STRU_MVTOCJV|STRU_MVTOCJV_INFO|
+        STRU_MVTOCJVE|STRU_MVZC|STRU_PHADJ|STRU_PHADJ2|STRU_REACHTARGET|STRU_STAT|STRU_SYNCHRO|STRU_TRACK)\\b'
+        'name': 'support.type.builtin.r3'
+        'comment':'strutture builtin r3'
+      }
+    ]
+  'builtin_variables':
+    'patterns':[
+      {
+        'match':'(?x)\\b(?i:acam|acclm|adv_rq|ah_filter|ah_filter_time|al_pres|al_stack_mask|as_lifo|ax_in_alarm|ax_in_mov|ax_in_mov2|ax_in_pos|
+        bad_config|battery_status|blink_dispan_led|c0_done|c0_done_l|C402_START_AL_FT|cam|cam_after_c0|day|def_ax|def_trd|device_sn|
+        device_pn_model|device_pn_family|df2000|dis_display|dis_ip_adj|dispan_keys|dispan_keys_ovr|dispan_keys_ovr_sts|DISPLAY_FREQ|
+        enabled_ax|FB_flag|fb_ref_mask|F1_omega|F1_Q|F1_TYPE|F2_omega|F2_Q|F2_TYPE|F3_omega|F3_Q|F3_TYPE|F4_omega|F4_Q|F4_TYPE|
+        F5_omega|F5_Q|F5_TYPE|F6_omega|F6_Q|F6_TYPE|F7_omega|F7_Q|F7_TYPE|F8_omega|F8_Q|F8_TYPE|F9_omega|F9_Q|F9_TYPE|
+        fr|fully_powered|gitter_adj|hold|hour|ip_write_bounds|keep_cp_reminder|language|lic_axes|lic_flags|lic_trd|lth_length|ltl_length|
+        ltn_length|lts_length|mask_def_ax|mask_def_trd|mask_nop_ax|message_code|minute|month|no_retentive|partial_rule_length|
+        power_allowed|powered|powered_ax|profint_status|quick_stop_so|rl_max|rl_min|rep_mask|rep_mask_out|restarted|rsi|
+        rsir|rte_ver|rule_length|rule_length_ch|sam|same_rule|sc1|sc2|sc3|sc4|sc5|sc6|sc7|sc8|second|sem_sts|sem_user|service_freq|
+        si|signature|spam|splm|sr_ovf_m|status|switching_off|sts_dispan_led|synch_time|synch_hw_time|synch_def|sync_restart|
+        synch_gitter_adj|sys_cfg|sys_count|sys_dump_sr|sys_dump_rr|sys_dump_r|sys_dump_nvsr|sys_dump_nvrr|sys_dump_nvr|
+        sys_dump_aux|sys_dump|sys_flag|sys_log|sys_log_aux|tam|tfb|tr_ovf_m|trd_al_info|tm_rl_max|u0|user_task_mask|
+        valid_data_to|valid_data_trd|varset_id|year|WGE_AMP|WGE_FREQ|WGE_ON_AX|WGE_OUT|WGE_TYPE|WGP_AMP|WGP_FREQ|WGP_ON_AX|WGP_OUT|WGP_TYPE|
+        WGV_AMP|WGV_FREQ|WGV_ON_AX|WGV_OUT|WGV_TYPE)\\b'
+        'name': 'support.variable.r3'
+        'comment':'variabili builtin r3'
+      }
+    ]
+  'builtin_functions':
+    'patterns':[
+      {
+        'match':'(?x)\\b(?i:alarm_set|alarm_reset|ah_cmd|ah_get_d|ah_get_s|ah_info|as_get_d|inf_report)\\b'
+        'name': 'support.function.builtin.alarms.r3'
+        'comment': 'funzioni builtin r3, per gestire allarmi'
+      }
+      {
+        'match':'(?x)\\b(?i:str_asc|str_chr|str_compact|str_equal|str_find|str_format|str_i|str_insert|str_len|str_mid|str_r|
+        str_replace|str_val|str_to_ipaddr)\\b'
+        'name': 'support.function.builtin.strings.r3'
+        'comment': 'funzioni builtin r3, per gestire stringhe'
+      }
+      {
+        'match':'(?x)\\b(?i:co_statusword|co_asw_sdo|co_controlword_state|co_controlword_om|co_get_ws_diagno|co_par_download|co_par_upload|
+        co_rerr|co_rnmt|co_robj|co_wobj|co_rpdo|co_send_sdo|co_wnmt|co_wpdo)\\b'
+        'name': 'support.function.builtin.canopen.r3'
+        'comment': 'funzioni builtin r3, per gestire CANOpen/ECAT'
+      }
+      {
+        'match':'(?x)\\b(?i:f_avail|f_close|f_copy|f_del|f_dir|f_gets|f_open|f_puts|f_read|f_read_table_s|f_read_table|f_rename|f_seek|f_write|f_format)\\b'
+        'name': 'support.function.builtin.flash.r3'
+        'comment': 'funzioni builtin r3, per gestire compact flash'
+      }
+      {
+        'match':'(?x)\\b(?i:cnet_diag|cnet_get_time_sync|cnet_receive|cnet_receive_status|cnet_rq_sync|cnet_send|cnet_status)\\b'
+        'name': 'support.function.builtin.cnet.r3'
+        'comment': 'funzioni builtin r3, per gestire protocollo cnet'
+      }
+      {
+        'match':'(?x)\\b(?i:ct_cd|ct_cdr|ct_cu|ct_cur|ct_cv|ct_load|ct_pv|ct_qd|ct_qu|ct_reset)\\b'
+        'name': 'support.function.builtin.counter.r3'
+        'comment': 'funzioni builtin r3, per gestire contatori'
+      }
+      {
+        'match':'(?x)\\b(?i:b0|crc16_be|crc16_le|dw0|r2m16|r2m32|r2m8|r_ror|r_rol|r_shl|r_shr|rbit|sb0|sdw0|sw0|
+        sbit|shift_left|shift_right|shl|shr|sizeof|tobcd|tobin|todeg|torad|wbit|w0|w1|w2|w3|fill_mem|move_byte|move_mem|sum8_mem|sum16_mem|sum32_mem|sumR_mem)\\b'
+        'name': 'support.function.builtin.data.r3'
+        'comment': 'funzioni builtin r3, per manipolare dati'
+      }
+      {
+        'match':'(?x)\\b(?i:cond_val|first_time)\\b'
+        'name': 'support.function.builtin.flow.r3'
+        'comment': 'funzioni builtin r3, per gestire flusso del programma'
+      }
+      {
+        'match':'(?x)\\b(?i:abs|abs_mod|acos|asin|atan|atan2|cos|fract|log|log10|mod|pow|round|sign|sin|sqrt|tan|trunc)\\b'
+        'name': 'support.function.builtin.math.r3'
+        'comment': 'funzioni builtin r3, per operazioni matematiche'
+      }
+      {
+        'match':'(?x)\\b(?i:command|delta_enc16|delta_enc32|diff|fall|fall_filt|filter_lp|filter_lp_st|filter_notch|filter_notch_st|in_range|
+        index_of|loop_time|maximum|master_filter|minimum|normalize|par_even|par_odd|ramp|random|range|rise|rise_filt|rtc_date|rtc_time|
+        Similar|statistics|time_micro|write_dis|dwell|set_version|out_m|group|int_after|int_inp|int_timer|mt_en|mt_dis|mt_wait|order|rule_epilogue|
+        rule_freq|rule_periodic|rule_prologue|aln|als|am|RID2AX|ca|cp|cp_l|cv|epos|epos_f|fb_ctrlw|fb_stsw|ia|inp|inp_w|ip|ip_f|ipp_idx|iv|iv_f|kbit2unit|
+        kff|max_acc|max_d_raw|max_spe|max_str|min_str|nvr|nvrr|nvsr|oc|out|out_w|p_ip|p_ip_f|p_iv|p_iv_f |pos_thr|pro_gai|r|rawcp|rawcp_l|rawip|rc|rr|sa_ip_idx|
+        sa_iv_dx|ser_cthr|ser_gai|ser_thr|sr|sref|t|tref|u0_channel)\\b'
+        'name': 'support.function.builtin.other.r3'
+        'comment': 'funzioni builtin r3, non appartenenti ad una categoria specifica'
+      }
+      {
+        'match':'(?x)\\b(?i:mv_cam|mv_crimper|mv_follow|mv_follow2|mv_mot_exec|mv_phase_adj|mv_phase_adj2|mv_ramp|mv_reach_target|mv_sinecam|
+        mv_synchro|mv_table|mv_tracking|mv_to|mv_to_vel|mv_to_cj|mv_to_cjv|mv_to_cjv_info|mva_jog|mva_jog2|mva_open_loop|mva_to_n|mva_to_n_v|
+        mva_to_n_cj|mva_to_n_v|mva_zc|ramp|kin_conv|tracking)\\b'
+        'name': 'support.function.builtin.movement.r3'
+        'comment': 'funzioni builtin r3, per movimentazioni'
+      }
+      {
+        'match':'(?x)\\b(?i:ps_power_enable|ps_channel_enable|ps_channel_reset_fault|ps_drive_reset|ps_status|ps_channel_enabled|ps_channel_fault)\\b'
+        'name': 'support.function.builtin.power_set.r3'
+        'comment': 'funzioni builtin r3, per gestire i power_set'
+      }
+      {
+        'match':'(?x)\\b(?i:mt_ats|mt_ats2|ref_prologue)\\b'
+        'name': 'support.function.builtin.rules.r3'
+        'comment': 'funzioni builtin r3, per gestire rules e tasks'
+      }
+      {
+        'match':'(?x)\\b(?i:ser_485_tx_sts|ser_bcc_h_init|ser_bin_in|ser_bin_out|ser_bin_ready|ser_buff_free|ser_buff_queue|ser_in|ser_out|
+        ser_r_sts|ser_ready|ser_w_sts|ser_con|ser_mod)\\b'
+        'name': 'support.function.builtin.serial.r3'
+        'comment': 'funzioni builtin r3, per gestire RS232 RS422 RS485 serial channels'
+      }
+      {
+        'match':'(?x)\\b(?i:tm_on|tm_of|tm_tp|tm_sqw|tm_int|tm_et|tm_pt|tm_pt2|tm_q|tm_reset)\\b'
+        'name': 'support.function.builtin.timer.r3'
+        'comment': 'funzioni builtin r3, per gestire timers'
+      }
+      {
+        'match':'(?x)\\b(?i:udp_open_client|udp_open_server|udp_close|udp_send|udp_send_to|udp_recv|udp_recv_from|udp_send_notify|udp_recv_notify)\\b'
+        'name': 'support.function.builtin.udp.r3'
+        'comment': 'funzioni builtin r3, per gestire protocollo UDP/IP'
+      }
+      {
+        'match':'(?x)\\b(?i:mbc_init|mbc_read_coils|mbc_read_discr_inp|mbc_read_hold_reg|mbc_read_inp_reg|mbc_write_coils|mbc_write_reg|
+        mbc_mask_write_reg|mbcu_read_coils|mbcu_read_discr_inp|mbcu_read_hold_reg|mbcu_read_inp_reg|mbcu_write_coils|mbcu_write_reg|
+        mbcu_mask_write_reg|mbc_read_coils_s|mbc_read_discr_inp_s|mbc_read_hold_reg_s|mbc_read_inp_reg_s|mbc_write_coils_s|mbc_write_reg_s|
+        mbc_mask_write_reg_s)\\b'
+        'name': 'support.function.builtin.modbus.r3'
+        'comment': 'funzioni builtin r3, per gestire protocollo MODBUS/TCP'
+      }
+    ]
+  'rpe_functions':
+    'patterns': [
+      {
+        'match': '(?x)\\b(?i:pe_exec_path|pe_move_joint|pe_move_cart|pe_move_circ|pe_fly_cart|pe_fly_joint|pe_fly2_cart|
+        pe_fly2_joint|pe_abort_path|pe_reset_stop|pe_set_tool|pe_set_coord|pe_distance|pe_push_event|pe_pop_event|pe_set_transform|
+        pe_set_position|pe_get_path_exec_pos|pe_stop_moves|pe_save_path_exec_status|pe_restore_path_exec_status|pe_set_path_reverse_exec|
+        pe_push_event_par|pe_pop_event_par|pe_move_single_axis|pe_mj_convert|pe_jc_convert|pe_set_joint_to_cart_function|pe_set_cart_to_joint_function|
+        pe_set_copy_storage_function)\\b'
+        'name': 'support.function.rpe.axes_group.r3'
+        'comment': 'funzioni introdotte da estensione rpe, per gestire gruppo assi'
+      }
+      {
+        'match':'(?x)\\b(?i:pe_load_lib_path)\\b'
+        'name': 'support.function.rpe.libs.r3'
+        'comment': 'funzioni introdotte da estensione rpe, per gestire librerie'
+      }
+      {
+        'match':'(?x)\\b(?i:pe_get_point_c|pe_get_point_j|pe_set_point_c|pe_set_point_j|pe_set_model)\\b'
+        'name': 'support.function.rpe.points.r3'
+        'comment': 'funzioni introdotte da estensione rpe, per gestire punti'
+      }
+      {
+        'match':'(?x)\\b(?i:pe_load_from_iso_file|pe_clear_path|pe_add_linear|pe_add_spline|pe_add_circle_te|pe_add_circle_3p|
+        pe_add_circle_tu|pe_add_joint|pe_add_event|pe_set_stop_angle|pe_set_stop|pe_set_trs|pe_set_trc|pe_path_compile|pe_path_point_from_pos|
+        pe_path_set_point_c|pe_path_get_point_c|pe_path_get_point_l|pe_path_set_model)\\b'
+        'name': 'support.function.rpe.paths.r3'
+        'comment': 'funzioni introdotte da estensione rpe, per gestire traiettorie'
+      }
+      {
+        'match':'(?x)\\b(?i:pe_reset_tr|pe_invert_tr|pe_translate|pe_rotate_x|pe_rotate_y|pe_rotate_z|pe_translate_rel|pe_rotate_x_rel|pe_rotate_y_rel|
+        pe_rotate_z_rel|pe_transform_tr|pe_transform_pc|pe_transform_from_3p)\\b'
+        'name': 'support.function.rpe.transform.r3'
+        'comment': 'funzioni introdotte da estensione rpe, per gestire trasformate'
+      }
+    ]
+  'generic_names':
+    'match': '[A-Za-z_][A-Za-z0-9_]*'
+  'illegal_names':
+    'match': '\\b(?i:(and|or|not|xor|function|break|r_and|r_or|r_not|r_xor|if|_if|else|_else|goto|call|case|select|while|continue|struct|struct_p|tabstr|default|do|return))\\b'
+    'name': 'invalid.illegal.name.r3'
+  'dotted_name':
+    'begin': '(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*)'
+    'end': '(?![A-Za-z0-9_\\.])'
+    'patterns': [
+      {
+        'begin': '(\\.)(?=[A-Za-z_][A-Za-z0-9_]*)'
+        'beginCaptures':
+          '1':
+            'name':'punctuation.separator.dereference.r3'
+        'end': '(?![A-Za-z0-9_])'
+        'patterns': [
+          {
+            'include': '#illegal_names'
+          }
+          {
+            'include': '#generic_names'
+          }
+        ]
+      }
+      {
+        'begin': '(?<!\\.)(?=[A-Za-z_][A-Za-z0-9_]*)'
+        'end': '(?![A-Za-z0-9_])'
+        'patterns': [
+          {
+            'include': '#builtin_functions'
+          }
+          {
+            'include': '#all_types'
+          }
+          {
+            'include': '#illegal_names'
+          }
+          {
+            'include': '#builtin_variables'
+          }
+          {
+            'include': '#generic_names'
+          }
+        ]
+      }
+    ]
