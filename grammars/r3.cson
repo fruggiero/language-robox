@@ -427,7 +427,7 @@
     'captures':
       '1':
         'name': 'keyword.other.metacommand.r3'
-    'match': '(?x)(?i:\\s*(\\$\\s*ifdef|\\$\\s*ifndef|\\$\\s*else|\\$\\s*endif|\\$\\s*rule|\\$\\s*task|\\$\\s*RULE_PERIODIC|\\$\\s*RULE_TIME|\\$\\s*RULE_INP|\\$\\s*DEFINE|
+    'match': '(?x)(?i:\\s*(\\$\\s*if|\\$\\s*ifdef|\\$\\s*ifndef|\\$\\s*else|\\$\\s*endif|\\$\\s*rule|\\$\\s*task|\\$\\s*RULE_PERIODIC|\\$\\s*RULE_TIME|\\$\\s*RULE_INP|\\$\\s*DEFINE|
     \\$\\s*expand|\\$\\s*include|\\$\\s*CLOSE_LOOP|\\$\\s*CHECK_ARRAY|\\$\\s*WRITE_ON_EXTERN|\\$\\s*USE_RPE|\\$\\s*ERROR|\\$\\s*STEP|
     \\$\\s*WARNING)\\b)'
   }
@@ -480,12 +480,12 @@
     'match': '(?i:\\b(rule|end_rule|endrule)\\b)'
   }
   {
-    'match': '\\b(?i:(0x\\h*))'
+    'match': '\\b(?i:(0x\\h*))\\b'
     'name': 'constant.numeric.integer.hexadecimal.with-prefix.r3'
     'comment': 'numeri esadecimali con prefisso 0x'
   }
   {
-    'match': '\\b(?i:(\\h+h))'
+    'match': '\\b(?i:(\\h+h))\\b'
     'name': 'constant.numeric.integer.hexadecimal.with-suffix.r3'
     'comment': 'numeri esadecimali con suffisso H'
   }
@@ -600,7 +600,7 @@
         'name': 'string.quoted.double.r3'
         'patterns': [
           {
-            'match': '\\\\(x\\h{2}|[0-2][0-7]{0,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)'
+            'match': '\\\\([\'\"])'
             'name': 'constant.character.escape.r3'
           }
         ]
