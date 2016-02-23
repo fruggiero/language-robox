@@ -3,6 +3,8 @@
 'fileTypes':[
   'r3'
   'i3'
+  'r3~'
+  'i3~'
 ]
 'foldingStartMarker': '(?i:^\\s*(struct|tabstr|function)\\s*$)' #IGNORATE DA ATOM ,textmate invece le usa
 'foldingStopMarker': '(?i:^\\s*(end_struct|endstruct|endfun|end_fun|endtab)\\s*$)'#IGNORATE DA ATOM,textmate invece le usa

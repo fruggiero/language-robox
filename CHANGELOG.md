@@ -1,3 +1,6 @@
+## 1.2.0 - Improvements
+* Added support for **r3~** and **i3~** temporary file extensions
+
 ## 1.1.0 - Improvements
 * Added highlighting for **bool** data type
 
