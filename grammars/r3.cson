@@ -630,7 +630,7 @@
   'primitive_types':
     'patterns': [
       {
-        'match': '\\b(?i:char|counter|float|int|i16|i32|i8|power_set|real|string|timer|u16|u32|u8)\\b'
+        'match': '\\b(?i:bool|char|counter|float|int|i16|i32|i8|power_set|real|string|timer|u16|u32|u8)\\b'
         'name': 'storage.type.r3'
       }
     ]

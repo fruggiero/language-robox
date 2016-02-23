@@ -1,3 +1,6 @@
+## 1.1.0 - Improvements
+* Added highlighting for **bool** data type
+
 ## 1.0.3 - Bug fixes
 * Fix escape in strings (now escape only quotes and no other characters)
 * Function names with a character in range a-f, suffixed with H were confused with suffixed
