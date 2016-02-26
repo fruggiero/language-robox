@@ -317,7 +317,7 @@
   }
   {
     'comment':'chiamata a funzione con il call'
-    'begin': '(?i:(?=\\s*call\\s*[A-Za-z_][A-Za-z0-9_]*\\s*\\(?))'
+    'begin': '(?i:(?=\\s*call\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(?))'
     'end': '(\\)?)(\\s*$)'
     'endCaptures':
       '1':
@@ -325,7 +325,7 @@
     'name': 'meta.function-call.r3'
     'patterns': [
       {
-        'begin': '(?i:\\s*(call)\\s*)'
+        'begin': '(?i:\\s*(call)\\s+)'
         'beginCaptures':
           '1':
             'name':'keyword.other.r3'
