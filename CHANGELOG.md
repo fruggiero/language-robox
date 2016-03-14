@@ -1,4 +1,7 @@
-## 1.2.2 - Improvements
+## 1.3.1 - added constants
+* Added support for AG_ZERO_EXE constant 
+
+## 1.3.0 - Improvements
 * Added support for AG_* constants
 * Added indentation on **case** (*select* structure) and **else** (*if,else,endif* structure)
 * Modified some tags
