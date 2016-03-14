@@ -174,24 +174,6 @@
     'name': 'meta.aux.end.r3'
   }
   {
-    'comment' : 'inizio definizione mainloop'
-    'begin': '(?i:^\\s*(__main_loop__)(?=\\s*))'
-    'beginCaptures':
-      '1':
-        'name': 'storage.type.mainloop.r3'
-    'end': '(?=\\n)'
-    'name': 'meta.mainloop.begin.r3'
-  }
-  {
-    'comment' : 'fine definizione mainloop'
-    'begin': '(?i:^\\s*(end_main_loop)(?=\\s*))'
-    'beginCaptures':
-      '1':
-        'name': 'storage.type.mainloop.r3'
-    'end': '(?=\\n)'
-    'name': 'meta.mainloop.end.r3'
-  }
-  {
     'comment' : 'inizio definizione ref'
     'begin': '(?i:^\\s*(ref)(?=\\s*$))'
     'beginCaptures':
@@ -282,8 +264,13 @@
     'name': 'meta.meta-conditional.end.r3'
   }
   {
+    'name':'keyword.other.r3'
+    'match':'\\b(?i:(public|extern))\\b'
+  }
+  {
     'name': 'keyword.control.r3'
-    'match': '\\b(?i:(_if|if|_else|else|end_if|endif|continue|break|select|case|default|endselect|end_select|return|goto|for|endfor|end_for|while|end_while|endwhile|do|end_do_while))\\b'
+    'match': '(?x)\\b(?i:(_if|if|_else|else|end_if|endif|continue|break|select|case|default|endselect|end_select|return|goto|
+    for|endfor|end_for|while|end_while|endwhile|do|end_do_while|__main_loop__|end_main_loop))\\b'
   }
   {
     'match': '\\b(?i:(true|false|K_E|K_PI|K_PIMEZZI|K_1_PI|K_DUEPI|K_EPSILON|K_MAXFLOAT|K_MINFLOAT|K_MAXREAL|K_MINREAL))\\b'
@@ -454,12 +441,6 @@
   {
     'captures':
       '1':
-        'name': 'storage.type.mainloop.r3'
-    'match': '(?i:\\b(__main_loop__|end_main_loop)\\b)'
-  }
-  {
-    'captures':
-      '1':
         'name': 'storage.type.aux.r3'
     'match': '(?i:\\b(aux|end_aux|endaux)\\b)'
   }
@@ -569,7 +550,6 @@
         'include':'#builtin_structs'
       }
     ]
-
   'line_comments':
     'comment':"commenti su riga singola"
     'begin': '(^[ \\t]+)?(?=\\;)'
@@ -671,7 +651,12 @@
         synch_gitter_adj|sys_cfg|sys_count|sys_dump_sr|sys_dump_rr|sys_dump_r|sys_dump_nvsr|sys_dump_nvrr|sys_dump_nvr|
         sys_dump_aux|sys_dump|sys_flag|sys_log|sys_log_aux|tam|tfb|tr_ovf_m|trd_al_info|tm_rl_max|u0|user_task_mask|
         valid_data_to|valid_data_trd|varset_id|year|WGE_AMP|WGE_FREQ|WGE_ON_AX|WGE_OUT|WGE_TYPE|WGP_AMP|WGP_FREQ|WGP_ON_AX|WGP_OUT|WGP_TYPE|
-        WGV_AMP|WGV_FREQ|WGV_ON_AX|WGV_OUT|WGV_TYPE)\\b'
+        WGV_AMP|WGV_FREQ|WGV_ON_AX|WGV_OUT|WGV_TYPE|AG_DISABLE|AG_MIS_POW|AG_MANUAL|AG_EXEC|AG_ZERO_WAIT|AG_ZERO_EXEC|AG_MAN_NOZ|AG_PASSIVE|
+        AG_BYPASS_POWER|AG_AFTER_RULES|AG_ABORT_ON_EOS|AG_NO_ABORT_PATH|AG_NO_JOINT_LIMIT|AG_SET_MOTOR_ON_POW|AG_RESET_ANGLES|
+        AG_SOVRA_ALL_MOVES|AG_PATH_LIMIT_ON_ACC|AG_USE_TAN_PARAMS|AG_USE_K_WRISTS|AG_STOP_ON_ANGLES|AG_HANDLE_FAST_STOP|AG_STOP_OVERLAP_MOVE|
+        AG_DECEL|AG_IN_POS|AG_HOLDED|AG_STOP|AG_FAST_STOP|AG_MV_CART|AG_DEBUG_MOVES|AG_DEBUG_COMPILE|M_IN_ALARM|M_REACHED|M_OVERSHOOTING|
+        M_ACCEL|M_AT_SPEED|M_DECEL|AG_NO_TRACK|AG_TRACK_START|AG_TRACK_ACC|AG_TRACK_SYNC|AG_TRACK_DEC|AG_TRACK_STOP|AG_TRACK_DEC_ERR|
+        AG_TRACK_STOP_ERR|AG_MAN_SLOW|AG_MAN_CART|AG_MAN_TOOL|AG_MAN_MOTOR|AG_MAN_STEP)\\b'
         'name': 'support.variable.r3'
         'comment':'variabili builtin r3'
       }

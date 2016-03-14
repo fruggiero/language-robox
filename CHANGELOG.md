@@ -1,3 +1,8 @@
+## 1.2.2 - Improvements
+* Added support for AG_* constants
+* Added indentation on **case** (*select* structure) and **else** (*if,else,endif* structure)
+* Modified some tags
+
 ## 1.2.0 - Improvements
 * Added support for **r3~** and **i3~** temporary file extensions
 
