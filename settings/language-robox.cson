@@ -8,9 +8,9 @@
     )'
     'decreaseIndentPattern':'(?x)
     (?i:
-      ^\\s*(end_?for|end_?select|end_?while|end_do_while|END_MAIN_LOOP|end_?struct|_?else|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref).*$
+      ^\\s*(end_?for|end_?select|end_?while|end_do_while|END_MAIN_LOOP|end_?struct|_?else|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref)\\s*\\S*$
     )'
     'foldEndPattern': '(?x)
     (?i:
-      ^\\s*(end_?for|end_?select|end_?while|end_do_while\\s*\\(.*\\)|END_MAIN_LOOP|end_?struct|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref).*$
+      ^\\s*(end_?for|end_?select|end_?while|end_do_while\\s*\\(.*\\)|END_MAIN_LOOP|end_?struct|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref)\\s*\\S*$
     )'
