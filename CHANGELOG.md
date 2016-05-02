@@ -1,4 +1,4 @@
-## 1.4.0 - removed snippets
+## 2.0.0 - removed snippets
 * Removed the snippets (moved to autocomplete-robox, for smarter suggestions)
 * Fixed indentation of some structures
 
