@@ -4,13 +4,13 @@
     'commentStart': '; '
     'increaseIndentPattern':'(?x)
     (?i:
-      ^\\s*(for|select|case|while|do|__main_loop__|struct|struct_p|_?if|else|tabstr|function|\\$\\s*if|\\$\\s*ifdef|\\$\\s*ifndef|rule|motion|aux|ref)\\s*\\S*$
+      ^\\s*(for|select|case|while|do|__main_loop__|struct|struct_p|_?if|else|tabstr|function|\\$\\s*if|\\$\\s*ifdef|\\$\\s*ifndef|rule|motion|aux|ref).*$
     )'
     'decreaseIndentPattern':'(?x)
     (?i:
-      ^\\s*(end_?for|end_?select|end_?while|end_do_while|END_MAIN_LOOP|end_?struct|_?else|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref)\\s*$
+      ^\\s*(end_?for|end_?select|end_?while|end_do_while|END_MAIN_LOOP|end_?struct|_?else|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref).*$
     )'
     'foldEndPattern': '(?x)
     (?i:
-      ^\\s*(end_?for|end_?select|end_?while|end_do_while\\s*\\(.*\\)|END_MAIN_LOOP|end_?struct|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref)\\s*$
+      ^\\s*(end_?for|end_?select|end_?while|end_do_while\\s*\\(.*\\)|END_MAIN_LOOP|end_?struct|end_?if|end_?tab|end_?fun|\\$\\s*endif|end_?rule|end_?motion|end_?aux|end_?ref).*$
     )'
