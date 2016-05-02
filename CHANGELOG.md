@@ -1,5 +1,8 @@
+## 1.4.0 - removed snippets
+* Removed the snippets (moved to autocomplete-robox, for smarter suggestions)
+
 ## 1.3.1 - added constants
-* Added support for AG_ZERO_EXE constant 
+* Added support for AG_ZERO_EXE constant
 
 ## 1.3.0 - Improvements
 * Added support for AG_* constants
